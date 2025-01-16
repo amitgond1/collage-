@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Coding Platform</title>
+  <style>
+    :root {
+      --bg-color: #4e54c8;
+      --text-color: #fff;
+      --button-bg: #fff;
+      --button-text: #4e54c8;
+      --accent-color: #6b72d6;
+      --box-bg: rgba(255, 255, 255, 0.1);
+      --timer-color: #ffcc00;
+      --question-color: #ffeb3b; /* Bright yellow for questions */
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      overflow: hidden;
+    }
+    header {
+      width: 100%;
+      padding: 10px 20px;
+      background: var(--accent-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-color);
+      font-size: 1.2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .timer {
+      font-size: 1.5rem;
+      color: var(--timer-color);
+    }
+    .main-container {
+      display: flex;
+      width: 100%;
+      height: calc(100vh - 60px); /* Account for the header height */
+    }
+    .question-container, .editor-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: var(--box-bg);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .editor-container {
+      border-right: none;
+    }
+    h2 {
+      margin: 10px 0;
+    }
+    textarea {
+      width: 100%;
+      height: 70%;
+      background: #333;
+      color: #fff;
+      border-radius: 5px;
+      padding: 10px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.2rem; /* Increased font size */
+    }
+    textarea:focus {
+      outline: 2px solid var(--accent-color);
+    }
+    button {
+      padding: 10px;
+      font-size: 1.2rem; /* Increased font size for buttons */
+      border-radius: 5px;
+      border: none;
+      background: var(--button-bg);
+      color: var(--button-text);
+      margin: 10px 5px 0;
+      cursor: pointer;
+    }
+    button:hover {
+      background: var(--accent-color);
+      color: var(--text-color);
+    }
+    #output {
+      margin-top: 10px;
+      padding: 10px;
+      background: #222;
+      color: #0f0;
+      border-radius: 5px;
+      font-size: 1.2rem; /* Increased font size */
+      height: 15%;
+      overflow-y: auto;
+    }
+    .difficulty-selector {
+      margin-bottom: 20px;
+    }
+    .difficulty-selector label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .difficulty-selector select {
+      padding: 5px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+    #question-output {
+      font-size: 1.4rem; /* Increased font size for questions */
+      line-height: 1.8;
+      color: var(--question-color); /* Bright yellow for questions */
+    }
+    #complexity-output {
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="greeting">Welcome, User!</div>
+    <div class="timer" id="timer">Time: 00:00</div>
+  </header>
+
+  <div class="main-container">
+    <!-- Question Panel -->
+    <div class="question-container">
+      <div class="difficulty-selector">
+        <label for="difficulty">Difficulty Level:</label>
+        <select id="difficulty" onchange="setDifficulty()">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <h2>Question</h2>
+      <div id="question-output">No question generated yet.</div>
+      <div id="complexity-output">Time Complexity: Not specified</div>
+      <button onclick="generateQuestion()">Generate Question</button>
+      <button onclick="toggleHint()">Show/Hide Hint</button>
+      <div id="hint-box" style="display: none;">Hint: Use built-in functions and logical steps!</div>
+    </div>
+
+    <!-- Code Editor Panel -->
+    <div class="editor-container">
+      <h2>Write Your Code</h2>
+      <textarea id="code-editor" placeholder="Write your code here..."></textarea>
+      <div>
+        <button onclick="runCode()">Run Code</button>
+        <button onclick="resetCode()">Reset</button>
+      </div>
+      <div id="output">Output will appear here...</div>
+    </div>
+  </div>
+
+  <script>
+    let defaultCode = `console.log("Hello, World!");`;
+    let timerInterval;
+    let seconds = 0;
+    let minutes = 0;
+
+   
+    const questions = {
+        easy: [
+          { question: "Write a function to reverse a string.", complexity: "O(n)" },
+          { question: "Find the maximum value in an array.", complexity: "O(n)" },
+          { question: "Write a function to check if a number is even.", complexity: "O(1)" },
+          { question: "Calculate the sum of numbers in an array.", complexity: "O(n)" },
+          { question: "Write a function to convert Celsius to Fahrenheit.", complexity: "O(1)" },
+          { question: "Find the index of an element in an array.", complexity: "O(n)" },
+          { question: "Write a function to capitalize the first letter of a string.", complexity: "O(n)" },
+          { question: "Check if a string contains a specific word.", complexity: "O(n)" },
+          { question: "Write a function to find the smallest number in an array.", complexity: "O(n)" },
+          { question: "Write a program to print the first 10 natural numbers.", complexity: "O(1)" }
+        ],
+        medium: [
+          { question: "Write a function to sort an array using bubble sort.", complexity: "O(n^2)" },
+          { question: "Find the factorial of a given number.", complexity: "O(n)" },
+          { question: "Write a function to check if a string is a palindrome.", complexity: "O(n)" },
+          { question: "Implement a basic calculator with add, subtract, multiply, and divide.", complexity: "O(1)" },
+          { question: "Write a function to find the second largest number in an array.", complexity: "O(n)" },
+          { question: "Implement a function to merge two sorted arrays.", complexity: "O(n + m)" },
+          { question: "Write a program to generate Fibonacci numbers up to n terms.", complexity: "O(n)" },
+          { question: "Check if a number is a prime number.", complexity: "O(sqrt(n))" },
+          { question: "Write a function to rotate an array by k positions.", complexity: "O(n)" },
+          { question: "Write a program to count the number of vowels in a string.", complexity: "O(n)" }
+        ],
+        hard: [
+          { question: "Write a function to solve the Tower of Hanoi problem.", complexity: "O(2^n)" },
+          { question: "Implement a function to check if two strings are anagrams.", complexity: "O(n)" },
+          { question: "Write a program to solve a Sudoku puzzle.", complexity: "O(9^(n*n))" },
+          { question: "Implement a binary search tree and its traversal methods.", complexity: "O(log(n)) for balanced trees" },
+          { question: "Write a function to find all subsets of a set.", complexity: "O(2^n)" },
+          { question: "Solve the N-Queens problem.", complexity: "O(n!)" },
+          { question: "Implement a function to perform matrix multiplication.", complexity: "O(n^3)" },
+          { question: "Write a function to find the longest increasing subsequence in an array.", complexity: "O(n^2) or O(n log(n))" },
+          { question: "Write a program to detect a cycle in a directed graph.", complexity: "O(V + E)" },
+          { question: "Implement a function to calculate the shortest path in a weighted graph.", complexity: "O(V^2) or O(E + V log(V)) for Dijkstra's" }
+        ]
+      };
+      
+      // Generate question and time complexity
+      function generateQuestion() {
+        const difficulty = document.getElementById("difficulty").value;
+        const questionList = questions[difficulty];
+        const randomIndex = Math.floor(Math.random() * questionList.length);
+        const selectedQuestion = questionList[randomIndex];
+        document.getElementById("question-output").innerText = selectedQuestion.question;
+        document.getElementById("complexity-output").innerText = `Time Complexity: ${selectedQuestion.complexity}`;
+      }
+      
+    // Timer and related functions remain unchanged.
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        seconds++;
+        if (seconds === 60) {
+          seconds = 0;
+          minutes++;
+        }
+        document.getElementById("timer").innerText = `Time: ${formatTime(minutes)}:${formatTime(seconds)}`;
+      }, 1000);
+    }
+
+    function formatTime(time) {
+      return time < 10 ? `0${time}` : time;
+    }
+
+    // Generate question
+    function generateQuestion() {
+      const difficulty = document.getElementById("difficulty").value;
+      const questionList = questions[difficulty];
+      const randomIndex = Math.floor(Math.random() * questionList.length);
+      const selectedQuestion = questionList[randomIndex];
+      document.getElementById("question-output").innerText = selectedQuestion.question;
+      document.getElementById("complexity-output").innerText = `Time Complexity: ${selectedQuestion.complexity}`;
+    }
+
+    // Other functions remain unchanged.
+    function toggleHint() {
+      const hintBox = document.getElementById("hint-box");
+      hintBox.style.display = hintBox.style.display === "none" ? "block" : "none";
+    }
+
+    function runCode() {
+      const code = document.getElementById("code-editor").value;
+      const output = document.getElementById("output");
+      try {
+        const result = eval(code);
+        output.innerText = `Output:\n${result}`;
+        output.style.color = "#0f0";
+      } catch (error) {
+        output.innerText = `Error:\n${error.message}`;
+        output.style.color = "#f00";
+      }
+    }
+
+    function resetCode() {
+      document.getElementById("code-editor").value = defaultCode;
+      document.getElementById("output").innerText = "Output will appear here...";
+    }
+
+    function setDifficulty() {
+      const difficulty = document.getElementById("difficulty").value;
+      alert(`Difficulty set to: ${difficulty}`);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const userName = prompt("Enter your name:");
+      document.getElementById("greeting").innerText = `Welcome, ${userName || "User"}!`;
+      startTimer();
+      resetCode();
+    });
+  </script>
+</body>
+</html>
