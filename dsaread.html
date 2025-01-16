@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Tutorial: Basic to Advanced</title>
+
+    <!-- Internal CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            background: #fff;
+            overflow-y: auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            color: #444;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .code-box {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Courier New", monospace;
+        }
+
+        .highlight {
+            background: #ffd700;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+            height: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #4caf50;
+            width: 0%;
+            text-align: center;
+            color: #fff;
+            line-height: 20px;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        /* Buttons */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .mark-done {
+            background: #28a745;
+        }
+
+        .mark-done:hover {
+            background: #218838;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        /* Completion Message */
+        .completed-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <h1>DSA Tutorial: <span class="highlight">Basic to Advanced</span></h1>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar">0%</div>
+        </div>
+
+        <!-- Tutorial Content -->
+        <div id="content">
+            <h2>Introduction to Data Structures</h2>
+            <p>
+                Data Structures are fundamental concepts in computer science that organize and store data efficiently for various operations. This tutorial covers common data structures like Arrays, Linked Lists, Stacks, and more.
+            </p>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="button-container">
+            <button id="prev-btn" onclick="prevSection()">Previous</button>
+            <button id="mark-done-btn" class="mark-done" onclick="markAsDone()">Mark as Done</button>
+            <button id="next-btn" onclick="nextSection()">Next</button>
+        </div>
+
+        <!-- Completion Message -->
+        <div id="completion-message" class="completed-message">
+            Congratulations! You've completed the tutorial!
+        </div>
+    </div>
+
+    <!-- JavaScript for Progress and Navigation -->
+    <script>
+        // Progress Bar and Content Data
+        const progressBar = document.getElementById("progress-bar");
+        const sections = [
+
+        {
+    title: "Introduction to DSA in C++",
+    content: `
+        <h2>Introduction to DSA in C++</h2>
+        <p>
+            Data Structures and Algorithms (DSA) are fundamental concepts for efficient problem solving. C++ provides various built-in data structures and algorithms, making it a powerful tool for implementing solutions.
+        </p>
+    `
+},
+
+
+{
+    title: "Arrays: Basics and Operations",
+    content: `
+        <h2>Arrays: Basics and Operations</h2>
+        <p>
+            An array is a collection of elements of the same type stored at contiguous memory locations. Operations include traversal, insertion, deletion, and searching.
+        </p>
+        <h3>Example: Array Operations</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Two-Dimensional Arrays",
+    content: `
+        <h2>Two-Dimensional Arrays</h2>
+        <p>
+            A two-dimensional array is an array of arrays. It is used to store data in a table-like structure.
+        </p>
+        <h3>Example: Two-Dimensional Array</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Strings in C++: Basic Operations",
+    content: `
+        <h2>Strings in C++: Basic Operations</h2>
+        <p>
+            Strings are arrays of characters terminated by a null character. C++ offers string manipulation functions like concatenation, comparison, and length calculation.
+        </p>
+        <h3>Example: String Operations</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string str = "Hello, World!";
+    cout << str.length() << endl; // Length of the string
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+{
+    title: "Linked Lists: Single Linked List Basics",
+    content: `
+        <h2>Linked Lists: Single Linked List Basics</h2>
+        <p>
+            A linked list is a linear data structure where elements are stored in nodes, and each node points to the next node in the list.
+        </p>
+        <h3>Example: Single Linked List</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+int main() {
+    Node* head = new Node();
+    head->data = 10;
+    head->next = nullptr;
+    cout << "Data: " << head->data << endl;
+    delete head;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+{
+    title: "Doubly Linked List: Basics",
+    content: `
+        <h2>Doubly Linked List: Basics</h2>
+        <p>
+            A doubly linked list is similar to a singly linked list, but each node also has a pointer to the previous node, allowing traversal in both directions.
+        </p>
+        <h3>Example: Doubly Linked List</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+};
+
+int main() {
+    Node* head = new Node();
+    head->data = 10;
+    head->next = nullptr;
+    head->prev = nullptr;
+    cout << "Data: " << head->data << endl;
+    delete head;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+{
+    title: "Stacks: Push and Pop Operations",
+    content: `
+        <h2>Stacks: Push and Pop Operations</h2>
+        <p>
+            A stack is a linear data structure that follows the Last In First Out (LIFO) principle. Common operations are <code>push</code> and <code>pop</code>.
+        </p>
+        <h3>Example: Stack Operations</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    stack<int> s;
+    s.push(10);
+    s.push(20);
+    cout << "Top element: " << s.top() << endl;
+    s.pop();
+    cout << "Top element after pop: " << s.top() << endl;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+{
+    title: "Queues: Enqueue and Dequeue Operations",
+    content: `
+        <h2>Queues: Enqueue and Dequeue Operations</h2>
+        <p>
+            A queue is a linear data structure that follows the First In First Out (FIFO) principle. The main operations are <code>enqueue</code> and <code>dequeue</code>.
+        </p>
+        <h3>Example: Queue Operations</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+    queue<int> q;
+    q.push(10);
+    q.push(20);
+    cout << "Front element: " << q.front() << endl;
+    q.pop();
+    cout << "Front element after pop: " << q.front() << endl;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Circular Linked List",
+    content: `
+        <h2>Circular Linked List</h2>
+        <p>
+            A circular linked list is a variation where the last node points back to the first node, making the list circular.
+        </p>
+        <h3>Example: Circular Linked List</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+int main() {
+    Node* head = new Node();
+    head->data = 10;
+    head->next = head;
+    cout << "Data: " << head->data << endl;
+    delete head;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Hashing: Hash Tables",
+    content: `
+        <h2>Hashing: Hash Tables</h2>
+        <p>
+            Hashing is a technique for converting a large amount of data into a smaller, fixed-size value, called a hash code. A hash table is used to store key-value pairs.
+        </p>
+        <h3>Example: Hash Table Using Unordered Map</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    unordered_map<int, string> map;
+    map[1] = "One";
+    map[2] = "Two";
+    cout << "Value for key 1: " << map[1] << endl;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Sorting Algorithms: Selection Sort",
+    content: `
+        <h2>Sorting Algorithms: Selection Sort</h2>
+        <p>
+            Selection sort is an in-place comparison-based algorithm that divides the list into a sorted and unsorted sublist.
+        </p>
+        <h3>Example: Selection Sort</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        int minIdx = i;
+        for (int j = i+1; j < n; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        swap(arr[i], arr[minIdx]);
+    }
+}
+
+int main() {
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    selectionSort(arr, n);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+{
+    title: "Sorting Algorithms: Bubble Sort",
+    content: `
+        <h2>Sorting Algorithms: Bubble Sort</h2>
+        <p>
+            Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
+        </p>
+        <h3>Example: Bubble Sort</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                swap(arr[j], arr[j+1]);
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    bubbleSort(arr, n);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+{
+    title: "Sorting Algorithms: Insertion Sort",
+    content: `
+        <h2>Sorting Algorithms: Insertion Sort</h2>
+        <p>
+            Insertion sort is a simple sorting algorithm that builds the final sorted array one element at a time by comparing each element to the sorted portion and inserting it at the correct position.
+        </p>
+        <h3>Example: Insertion Sort</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main() {
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    insertionSort(arr, n);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Binary Search Algorithm",
+    content: `
+        <h2>Binary Search Algorithm</h2>
+        <p>
+            Binary search is an efficient algorithm for finding an item from a sorted list by repeatedly dividing the search interval in half.
+        </p>
+        <h3>Example: Binary Search</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+int binarySearch(int arr[], int n, int x) {
+    int left = 0, right = n - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == x) {
+            return mid;
+        }
+        if (arr[mid] < x) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    int arr[] = {1, 3, 5, 7, 9, 11, 13};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int result = binarySearch(arr, n, 7);
+    if (result != -1) {
+        cout << "Element found at index " << result << endl;
+    } else {
+        cout << "Element not found" << endl;
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Merge Sort Algorithm",
+    content: `
+        <h2>Merge Sort Algorithm</h2>
+        <p>
+            Merge sort is a divide-and-conquer algorithm that divides the list into smaller sublists, sorts them, and then merges them back together.
+        </p>
+        <h3>Example: Merge Sort</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+void merge(int arr[], int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+    int L[n1], R[n2];
+
+    for (int i = 0; i < n1; i++) {
+        L[i] = arr[l + i];
+    }
+    for (int j = 0; j < n2; j++) {
+        R[j] = arr[m + 1 + j];
+    }
+
+    int i = 0, j = 0, k = l;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(int arr[], int l, int r) {
+    if (l >= r) return;
+    int m = l + (r - l) / 2;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    merge(arr, l, m, r);
+}
+
+int main() {
+    int arr[] = {38, 27, 43, 3, 9, 82, 10};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    mergeSort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Quick Sort Algorithm",
+    content: `
+        <h2>Quick Sort Algorithm</h2>
+        <p>
+            Quick sort is an efficient divide-and-conquer algorithm that selects a pivot element and partitions the array around it.
+        </p>
+        <h3>Example: Quick Sort</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    int arr[] = {10, 80, 30, 90, 40, 50, 70};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    quickSort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Graph Representation: Adjacency Matrix",
+    content: `
+        <h2>Graph Representation: Adjacency Matrix</h2>
+        <p>
+            An adjacency matrix is a 2D array used to represent a graph, where each cell indicates whether a pair of nodes is connected.
+        </p>
+        <h3>Example: Adjacency Matrix</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+int main() {
+    int graph[5][5] = {
+        {0, 1, 0, 0, 0},
+        {1, 0, 1, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 0, 1, 0, 1},
+        {0, 0, 0, 1, 0}
+    };
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            cout << graph[i][j] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Graph Representation: Adjacency List",
+    content: `
+        <h2>Graph Representation: Adjacency List</h2>
+        <p>
+            An adjacency list is a collection of lists or arrays, where each list represents a vertex and contains all the adjacent vertices.
+        </p>
+        <h3>Example: Adjacency List</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <list>
+using namespace std;
+
+int main() {
+    list<int> adj[5];
+    adj[0].push_back(1);
+    adj[1].push_back(0);
+    adj[1].push_back(2);
+    adj[2].push_back(1);
+    adj[2].push_back(3);
+    adj[3].push_back(2);
+    adj[3].push_back(4);
+    adj[4].push_back(3);
+
+    for (int i = 0; i < 5; i++) {
+        cout << "Adjacency list of vertex " << i << ": ";
+        for (auto v : adj[i]) {
+            cout << v << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Breadth-First Search (BFS)",
+    content: `
+        <h2>Breadth-First Search (BFS)</h2>
+        <p>
+            BFS is an algorithm for traversing or searching tree or graph data structures. It starts at the root and explores all neighboring nodes at the present depth prior to moving on to nodes at the next depth level.
+        </p>
+        <h3>Example: BFS</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <queue>
+#include <list>
+using namespace std;
+
+void BFS(list<int> adj[], int V) {
+    bool visited[V] = {false};
+    queue<int> q;
+    visited[0] = true;
+    q.push(0);
+
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        cout << node << " ";
+
+        for (auto neighbor : adj[node]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}
+
+int main() {
+    list<int> adj[5];
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+    adj[1].push_back(0);
+    adj[1].push_back(3);
+    adj[2].push_back(0);
+    adj[3].push_back(1);
+
+    BFS(adj, 5);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Depth-First Search (DFS)",
+    content: `
+        <h2>Depth-First Search (DFS)</h2>
+        <p>
+            DFS is an algorithm for traversing or searching tree or graph data structures. Starting from the root node, it explores as far as possible along each branch before backtracking.
+        </p>
+        <h3>Example: DFS</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <list>
+using namespace std;
+
+void DFSUtil(int v, bool visited[], list<int> adj[]) {
+    visited[v] = true;
+    cout << v << " ";
+
+    for (auto neighbor : adj[v]) {
+        if (!visited[neighbor]) {
+            DFSUtil(neighbor, visited, adj);
+        }
+    }
+}
+
+void DFS(list<int> adj[], int V) {
+    bool visited[V] = {false};
+    DFSUtil(0, visited, adj);
+}
+
+int main() {
+    list<int> adj[5];
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+    adj[1].push_back(0);
+    adj[1].push_back(3);
+    adj[2].push_back(0);
+    adj[3].push_back(1);
+
+    DFS(adj, 5);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Dijkstra's Algorithm (Shortest Path)",
+    content: `
+        <h2>Dijkstra's Algorithm (Shortest Path)</h2>
+        <p>
+            Dijkstra's algorithm finds the shortest path between two nodes in a graph with non-negative edge weights.
+        </p>
+        <h3>Example: Dijkstra's Algorithm</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <climits>
+#include <vector>
+#include <set>
+using namespace std;
+
+void dijkstra(int V, vector<pair<int, int>> adj[], int source) {
+    vector<int> dist(V, INT_MAX);
+    dist[source] = 0;
+    set<pair<int, int>> s;
+    s.insert({0, source});
+
+    while (!s.empty()) {
+        int u = s.begin()->second;
+        s.erase(s.begin());
+
+        for (auto neighbor : adj[u]) {
+            int v = neighbor.first;
+            int weight = neighbor.second;
+
+            if (dist[u] + weight < dist[v]) {
+                if (dist[v] != INT_MAX) {
+                    s.erase(s.find({dist[v], v}));
+                }
+                dist[v] = dist[u] + weight;
+                s.insert({dist[v], v});
+            }
+        }
+    }
+
+    for (int i = 0; i < V; i++) {
+        cout << "Distance from " << source << " to " << i << ": " << dist[i] << endl;
+    }
+}
+
+int main() {
+    int V = 9;
+    vector<pair<int, int>> adj[V];
+    adj[0].push_back({1, 4});
+    adj[0].push_back({7, 8});
+    adj[1].push_back({0, 4});
+    adj[1].push_back({2, 8});
+    adj[2].push_back({1, 8});
+    adj[2].push_back({3, 7});
+    adj[2].push_back({5, 4});
+    adj[3].push_back({2, 7});
+    adj[3].push_back({4, 9});
+    adj[4].push_back({3, 9});
+    adj[4].push_back({5, 10});
+    adj[5].push_back({2, 4});
+    adj[5].push_back({4, 10});
+    adj[5].push_back({6, 2});
+    adj[6].push_back({5, 2});
+    adj[6].push_back({7, 1});
+    adj[7].push_back({0, 8});
+    adj[7].push_back({6, 1});
+    adj[7].push_back({8, 7});
+    adj[8].push_back({7, 7});
+    adj[8].push_back({6, 6});
+
+    dijkstra(V, adj, 0);
+
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Bellman-Ford Algorithm (Shortest Path)",
+    content: `
+        <h2>Bellman-Ford Algorithm (Shortest Path)</h2>
+        <p>
+            Bellman-Ford algorithm is used for finding the shortest paths in a graph, even with negative weight edges.
+        </p>
+        <h3>Example: Bellman-Ford Algorithm</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+void bellmanFord(int V, vector<pair<pair<int, int>, int>>& edges, int source) {
+    vector<int> dist(V, INT_MAX);
+    dist[source] = 0;
+
+    for (int i = 1; i < V - 1; i++) {
+        for (auto edge : edges) {
+            int u = edge.first.first;
+            int v = edge.first.second;
+            int weight = edge.second;
+            if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+                dist[v] = dist[u] + weight;
+            }
+        }
+    }
+
+    for (auto edge : edges) {
+        int u = edge.first.first;
+        int v = edge.first.second;
+        int weight = edge.second;
+        if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+            cout << "Negative weight cycle detected!" << endl;
+            return;
+        }
+    }
+
+    for (int i = 0; i < V; i++) {
+        cout << "Distance from " << source << " to " << i << ": " << dist[i] << endl;
+    }
+}
+
+int main() {
+    int V = 5;
+    vector<pair<pair<int, int>, int>> edges = {
+        {{0, 1}, -1}, {{0, 2}, 4}, {{1, 2}, 3},
+        {{1, 3}, 2}, {{1, 4}, 2}, {{3, 2}, 5}, {{3, 1}, 1}, {{4, 3}, -3}
+    };
+
+    bellmanFord(V, edges, 0);
+
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Floyd-Warshall Algorithm (All-Pairs Shortest Path)",
+    content: `
+        <h2>Floyd-Warshall Algorithm (All-Pairs Shortest Path)</h2>
+        <p>
+            Floyd-Warshall algorithm is used to find the shortest paths between all pairs of nodes in a graph.
+        </p>
+        <h3>Example: Floyd-Warshall Algorithm</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <climits>
+using namespace std;
+
+void floydWarshall(int V, int graph[][4]) {
+    int dist[V][V];
+
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            if (graph[i][j] == -1) {
+                dist[i][j] = INT_MAX;
+            } else {
+                dist[i][j] = graph[i][j];
+            }
+        }
+    }
+
+    for (int k = 0; k < V; k++) {
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX && dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+
+    cout << "Shortest path matrix:" << endl;
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            if (dist[i][j] == INT_MAX) {
+                cout << "INF ";
+            } else {
+                cout << dist[i][j] << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int graph[4][4] = {
+        {0, 3, -1, 7},
+        {-1, 0, 2, -1},
+        {-1, -1, 0, 1},
+        {2, -1, -1, 0}
+    };
+
+    floydWarshall(4, graph);
+
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Knapsack Problem (Dynamic Programming)",
+    content: `
+        <h2>Knapsack Problem (Dynamic Programming)</h2>
+        <p>
+            The knapsack problem is a combinatorial optimization problem where the goal is to maximize the value of items in a knapsack without exceeding its weight capacity.
+        </p>
+        <h3>Example: 0/1 Knapsack Problem</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int knapsack(int W, vector<int>& wt, vector<int>& val, int n) {
+    vector<vector<int>> dp(n + 1, vector<int>(W + 1, 0));
+
+    for (int i = 1; i <= n; i++) {
+        for (int w = 1; w <= W; w++) {
+            if (wt[i - 1] <= w) {
+                dp[i][w] = max(dp[i - 1][w], val[i - 1] + dp[i - 1][w - wt[i - 1]]);
+            } else {
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+
+    return dp[n][W];
+}
+
+int main() {
+    vector<int> val = {60, 100, 120};
+    vector<int> wt = {10, 20, 30};
+    int W = 50;
+    int n = val.size();
+    cout << "Maximum value in Knapsack: " << knapsack(W, wt, val, n) << endl;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+{
+    title: "Longest Common Subsequence (LCS)",
+    content: `
+        <h2>Longest Common Subsequence (LCS)</h2>
+        <p>
+            The LCS problem is a classic dynamic programming problem that finds the longest subsequence common to two sequences.
+        </p>
+        <h3>Example: LCS Problem</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int lcs(string X, string Y) {
+    int m = X.length(), n = Y.length();
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1));
+
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (X[i - 1] == Y[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            } else {
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+    }
+
+    return dp[m][n];
+}
+
+int main() {
+    string X = "AGGTAB";
+    string Y = "GXTXAYB";
+    cout << "Length of LCS: " << lcs(X, Y) << endl;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Matrix Chain Multiplication (Dynamic Programming)",
+    content: `
+        <h2>Matrix Chain Multiplication (Dynamic Programming)</h2>
+        <p>
+            The Matrix Chain Multiplication problem is a classic optimization problem that involves finding the most efficient way to multiply a given sequence of matrices.
+        </p>
+        <h3>Example: Matrix Chain Multiplication</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+int matrixChainOrder(vector<int>& p, int n) {
+    vector<vector<int>> dp(n, vector<int>(n, 0));
+
+    for (int len = 2; len < n; len++) {
+        for (int i = 0; i < n - len; i++) {
+            int j = i + len;
+            dp[i][j] = INT_MAX;
+            for (int k = i + 1; k < j; k++) {
+                int q = dp[i][k] + dp[k][j] + p[i] * p[k] * p[j];
+                dp[i][j] = min(dp[i][j], q);
+            }
+        }
+    }
+
+    return dp[0][n - 1];
+}
+
+int main() {
+    vector<int> p = {1, 2, 3, 4, 5};
+    int n = p.size();
+    cout << "Minimum number of multiplications: " << matrixChainOrder(p, n) << endl;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Topological Sorting (Graph)",
+    content: `
+        <h2>Topological Sorting (Graph)</h2>
+        <p>
+            Topological sorting is used to order vertices in a Directed Acyclic Graph (DAG) such that for every directed edge uv, vertex u comes before v.
+        </p>
+        <h3>Example: Topological Sort using DFS</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+
+void topologicalSortUtil(int v, vector<bool>& visited, stack<int>& Stack, vector<vector<int>>& adj) {
+    visited[v] = true;
+
+    for (int i = 0; i < adj[v].size(); i++) {
+        if (!visited[adj[v][i]]) {
+            topologicalSortUtil(adj[v][i], visited, Stack, adj);
+        }
+    }
+
+    Stack.push(v);
+}
+
+void topologicalSort(vector<vector<int>>& adj, int V) {
+    stack<int> Stack;
+    vector<bool> visited(V, false);
+
+    for (int i = 0; i < V; i++) {
+        if (!visited[i]) {
+            topologicalSortUtil(i, visited, Stack, adj);
+        }
+    }
+
+    while (!Stack.empty()) {
+        cout << Stack.top() << " ";
+        Stack.pop();
+    }
+}
+
+int main() {
+    int V = 6;
+    vector<vector<int>> adj(V);
+    adj[5].push_back(2);
+    adj[5].push_back(0);
+    adj[4].push_back(0);
+    adj[4].push_back(1);
+    adj[2].push_back(3);
+    adj[3].push_back(1);
+
+    cout << "Topological Sort: ";
+    topologicalSort(adj, V);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Kruskal's Algorithm (Minimum Spanning Tree)",
+    content: `
+        <h2>Kruskal's Algorithm (Minimum Spanning Tree)</h2>
+        <p>
+            Kruskal's algorithm is used to find the minimum spanning tree (MST) of a connected, weighted graph by sorting the edges in non-decreasing order and applying a union-find structure.
+        </p>
+        <h3>Example: Kruskal's Algorithm</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Edge {
+public:
+    int u, v, weight;
+    Edge(int u, int v, int weight) : u(u), v(v), weight(weight) {}
+};
+
+class DisjointSet {
+public:
+    vector<int> parent, rank;
+    DisjointSet(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i < n; i++) parent[i] = i;
+    }
+
+    int find(int u) {
+        if (u != parent[u]) {
+            parent[u] = find(parent[u]);
+        }
+        return parent[u];
+    }
+
+    void unionSets(int u, int v) {
+        int rootU = find(u);
+        int rootV = find(v);
+        if (rootU != rootV) {
+            if (rank[rootU] > rank[rootV]) {
+                parent[rootV] = rootU;
+            } else {
+                parent[rootU] = rootV;
+                if (rank[rootU] == rank[rootV]) rank[rootV]++;
+            }
+        }
+    }
+};
+
+void kruskal(int V, vector<Edge>& edges) {
+    DisjointSet ds(V);
+    sort(edges.begin(), edges.end(), [](Edge& e1, Edge& e2) {
+        return e1.weight < e2.weight;
+    });
+
+    int mstWeight = 0;
+    for (auto& edge : edges) {
+        int u = edge.u, v = edge.v, weight = edge.weight;
+        if (ds.find(u) != ds.find(v)) {
+            ds.unionSets(u, v);
+            mstWeight += weight;
+            cout << u << " - " << v << " : " << weight << endl;
+        }
+    }
+
+    cout << "Weight of MST: " << mstWeight << endl;
+}
+
+int main() {
+    int V = 4;
+    vector<Edge> edges = { {0, 1, 10}, {0, 2, 6}, {0, 3, 5}, {1, 3, 15}, {2, 3, 4} };
+
+    kruskal(V, edges);
+
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Prim's Algorithm (Minimum Spanning Tree)",
+    content: `
+        <h2>Prim's Algorithm (Minimum Spanning Tree)</h2>
+        <p>
+            Prim's algorithm finds the minimum spanning tree by starting from any vertex and expanding the tree by adding the smallest edge to a new vertex.
+        </p>
+        <h3>Example: Prim's Algorithm</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+void primMST(int V, vector<vector<int>>& graph) {
+    vector<int> key(V, INT_MAX), parent(V, -1);
+    vector<bool> inMST(V, false);
+    key[0] = 0;
+
+    for (int count = 0; count < V - 1; count++) {
+        int u = -1;
+        for (int v = 0; v < V; v++) {
+            if (!inMST[v] && (u == -1 || key[v] < key[u])) {
+                u = v;
+            }
+        }
+
+        inMST[u] = true;
+
+        for (int v = 0; v < V; v++) {
+            if (graph[u][v] != 0 && !inMST[v] && graph[u][v] < key[v]) {
+                key[v] = graph[u][v];
+                parent[v] = u;
+            }
+        }
+    }
+
+    cout << "Edges in the MST:" << endl;
+    for (int i = 1; i < V; i++) {
+        cout << parent[i] << " - " << i << " : " << graph[i][parent[i]] << endl;
+    }
+}
+
+int main() {
+    int V = 5;
+    vector<vector<int>> graph = { {0, 2, 0, 6, 0}, {2, 0, 3, 8, 5}, {0, 3, 0, 0, 7}, {6, 8, 0, 0, 9}, {0, 5, 7, 9, 0} };
+
+    primMST(V, graph);
+
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Breadth-First Search (BFS) on Graph",
+    content: `
+        <h2>Breadth-First Search (BFS) on Graph</h2>
+        <p>
+            BFS is a graph traversal algorithm that explores vertices in layers, starting from the source node and visiting all its neighbors before moving on to the next level.
+        </p>
+        <h3>Example: BFS on Graph</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+void bfs(int V, vector<vector<int>>& adj, int start) {
+    vector<bool> visited(V, false);
+    queue<int> q;
+    visited[start] = true;
+    q.push(start);
+
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        cout << u << " ";
+
+        for (int v : adj[u]) {
+            if (!visited[v]) {
+                visited[v] = true;
+                q.push(v);
+            }
+        }
+    }
+}
+
+int main() {
+    int V = 6;
+    vector<vector<int>> adj(V);
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+    adj[1].push_back(0);
+    adj[1].push_back(3);
+    adj[2].push_back(0);
+    adj[2].push_back(4);
+    adj[3].push_back(1);
+    adj[3].push_back(5);
+    adj[4].push_back(2);
+    adj[5].push_back(3);
+
+    cout << "BFS starting from vertex 0: ";
+    bfs(V, adj, 0);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Breadth-First Search (BFS) on Graph",
+    content: `
+        <h2>Breadth-First Search (BFS) on Graph</h2>
+        <p>
+            BFS is a graph traversal algorithm that explores vertices in layers, starting from the source node and visiting all its neighbors before moving on to the next level.
+        </p>
+        <h3>Example: BFS on Graph</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+void bfs(int V, vector<vector<int>>& adj, int start) {
+    vector<bool> visited(V, false);
+    queue<int> q;
+    visited[start] = true;
+    q.push(start);
+
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        cout << u << " ";
+
+        for (int v : adj[u]) {
+            if (!visited[v]) {
+                visited[v] = true;
+                q.push(v);
+            }
+        }
+    }
+}
+
+int main() {
+    int V = 6;
+    vector<vector<int>> adj(V);
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+    adj[1].push_back(0);
+    adj[1].push_back(3);
+    adj[2].push_back(0);
+    adj[2].push_back(4);
+    adj[3].push_back(1);
+    adj[3].push_back(5);
+    adj[4].push_back(2);
+    adj[5].push_back(3);
+
+    cout << "BFS starting from vertex 0: ";
+    bfs(V, adj, 0);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Depth-First Search (DFS) on Graph",
+    content: `
+        <h2>Depth-First Search (DFS) on Graph</h2>
+        <p>
+            DFS is a graph traversal algorithm that explores as far as possible along each branch before backtracking. It can be implemented using recursion or a stack.
+        </p>
+        <h3>Example: DFS on Graph</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void dfs(int v, vector<vector<int>>& adj, vector<bool>& visited) {
+    visited[v] = true;
+    cout << v << " ";
+
+    for (int u : adj[v]) {
+        if (!visited[u]) {
+            dfs(u, adj, visited);
+        }
+    }
+}
+
+int main() {
+    int V = 6;
+    vector<vector<int>> adj(V);
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+    adj[1].push_back(0);
+    adj[1].push_back(3);
+    adj[2].push_back(0);
+    adj[2].push_back(4);
+    adj[3].push_back(1);
+    adj[3].push_back(5);
+    adj[4].push_back(2);
+    adj[5].push_back(3);
+
+    vector<bool> visited(V, false);
+    cout << "DFS starting from vertex 0: ";
+    dfs(0, adj, visited);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Dijkstra's Algorithm (Shortest Path)",
+    content: `
+        <h2>Dijkstra's Algorithm (Shortest Path)</h2>
+        <p>
+            Dijkstra's algorithm is used to find the shortest path between a source node and all other nodes in a weighted graph.
+        </p>
+        <h3>Example: Dijkstra's Algorithm</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+void dijkstra(int V, vector<vector<int>>& graph, int src) {
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+    vector<bool> sptSet(V, false);
+
+    for (int count = 0; count < V - 1; count++) {
+        int u = -1;
+        for (int v = 0; v < V; v++) {
+            if (!sptSet[v] && (u == -1 || dist[v] < dist[u])) {
+                u = v;
+            }
+        }
+
+        sptSet[u] = true;
+
+        for (int v = 0; v < V; v++) {
+            if (graph[u][v] && !sptSet[v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v]) {
+                dist[v] = dist[u] + graph[u][v];
+            }
+        }
+    }
+
+    cout << "Shortest distances from source " << src << ":\n";
+    for (int i = 0; i < V; i++) {
+        cout << "Node " << i << ": " << dist[i] << endl;
+    }
+}
+
+int main() {
+    int V = 9;
+    vector<vector<int>> graph = {
+        {0, 4, 0, 0, 0, 0, 0, 8, 0},
+        {4, 0, 8, 0, 0, 0, 0, 11, 0},
+        {0, 8, 0, 7, 0, 4, 0, 0, 2},
+        {0, 0, 7, 0, 9, 14, 0, 0, 0},
+        {0, 0, 0, 9, 0, 10, 0, 0, 0},
+        {0, 0, 4, 14, 10, 0, 2, 0, 0},
+        {0, 0, 0, 0, 0, 2, 0, 1, 6},
+        {8, 11, 0, 0, 0, 0, 1, 0, 7},
+        {0, 0, 2, 0, 0, 0, 6, 7, 0}
+    };
+
+    dijkstra(V, graph, 0);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Bellman-Ford Algorithm (Shortest Path)",
+    content: `
+        <h2>Bellman-Ford Algorithm (Shortest Path)</h2>
+        <p>
+            The Bellman-Ford algorithm finds the shortest path from a single source vertex to all other vertices in a graph, even if there are negative weight edges.
+        </p>
+        <h3>Example: Bellman-Ford Algorithm</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+struct Edge {
+    int u, v, weight;
+    Edge(int u, int v, int weight) : u(u), v(v), weight(weight) {}
+};
+
+void bellmanFord(int V, vector<Edge>& edges, int src) {
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+
+    for (int i = 1; i <= V - 1; i++) {
+        for (auto& edge : edges) {
+            if (dist[edge.u] != INT_MAX && dist[edge.u] + edge.weight < dist[edge.v]) {
+                dist[edge.v] = dist[edge.u] + edge.weight;
+            }
+        }
+    }
+
+    for (auto& edge : edges) {
+        if (dist[edge.u] != INT_MAX && dist[edge.u] + edge.weight < dist[edge.v]) {
+            cout << "Graph contains negative weight cycle" << endl;
+            return;
+        }
+    }
+
+    cout << "Shortest distances from source " << src << ":\n";
+    for (int i = 0; i < V; i++) {
+        cout << "Node " << i << ": " << dist[i] << endl;
+    }
+}
+
+int main() {
+    int V = 5;
+    vector<Edge> edges = {
+        {0, 1, -1}, {0, 2, 4}, {1, 2, 3}, {1, 3, 2}, {1, 4, 2}, {3, 2, 5}, {3, 4, -3}, {4, 3, 3}
+    };
+
+    bellmanFord(V, edges, 0);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Floyd-Warshall Algorithm (All-Pairs Shortest Path)",
+    content: `
+        <h2>Floyd-Warshall Algorithm (All-Pairs Shortest Path)</h2>
+        <p>
+            The Floyd-Warshall algorithm finds the shortest paths between all pairs of vertices in a graph, even with negative weight edges.
+        </p>
+        <h3>Example: Floyd-Warshall Algorithm</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+void floydWarshall(int V, vector<vector<int>>& graph) {
+    vector<vector<int>> dist = graph;
+
+    for (int k = 0; k < V; k++) {
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX && dist[i][j] > dist[i][k] + dist[k][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+
+    cout << "All-Pairs Shortest Path Matrix:\n";
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            if (dist[i][j] == INT_MAX) {
+                cout << "INF ";
+            } else {
+                cout << dist[i][j] << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int V = 4;
+    vector<vector<int>> graph = {
+        {0, 3, INT_MAX, INT_MAX},
+        {2, 0, INT_MAX, 1},
+        {INT_MAX, 7, 0, 2},
+        {INT_MAX, INT_MAX, 3, 0}
+    };
+
+    floydWarshall(V, graph);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Knapsack Problem (Dynamic Programming)",
+    content: `
+        <h2>Knapsack Problem (Dynamic Programming)</h2>
+        <p>
+            The Knapsack problem involves finding the maximum value of items that can be carried in a knapsack of limited capacity, where each item has a weight and value.
+        </p>
+        <h3>Example: 0/1 Knapsack Problem</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int knapsack(int W, vector<int>& weights, vector<int>& values, int n) {
+    vector<vector<int>> dp(n+1, vector<int>(W+1, 0));
+
+    for (int i = 1; i <= n; i++) {
+        for (int w = 1; w <= W; w++) {
+            if (weights[i-1] <= w) {
+                dp[i][w] = max(dp[i-1][w], values[i-1] + dp[i-1][w-weights[i-1]]);
+            } else {
+                dp[i][w] = dp[i-1][w];
+            }
+        }
+    }
+
+    return dp[n][W];
+}
+
+int main() {
+    int W = 50;
+    vector<int> values = {60, 100, 120};
+    vector<int> weights = {10, 20, 30};
+    int n = values.size();
+
+    cout << "Maximum value in Knapsack: " << knapsack(W, weights, values, n) << endl;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Binary Search Tree (BST)",
+    content: `
+        <h2>Binary Search Tree (BST)</h2>
+        <p>
+            A Binary Search Tree (BST) is a binary tree where the left child of a node contains a value less than the node, and the right child contains a value greater than the node.
+        </p>
+        <h3>Example: BST Insertion and Traversal</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left, * right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+Node* insert(Node* root, int data) {
+    if (root == nullptr) return new Node(data);
+    if (data < root->data) root->left = insert(root->left, data);
+    else root->right = insert(root->right, data);
+    return root;
+}
+
+void inorder(Node* root) {
+    if (root == nullptr) return;
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+
+int main() {
+    Node* root = nullptr;
+    root = insert(root, 50);
+    root = insert(root, 30);
+    root = insert(root, 70);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 60);
+    root = insert(root, 80);
+
+    cout << "Inorder Traversal: ";
+    inorder(root);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "AVL Tree (Self-Balancing BST)",
+    content: `
+        <h2>AVL Tree (Self-Balancing BST)</h2>
+        <p>
+            An AVL Tree is a self-balancing binary search tree. The difference in heights of left and right subtrees cannot be more than one for all nodes.
+        </p>
+        <h3>Example: AVL Tree Insertion</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left, * right;
+    int height;
+    Node(int val) : data(val), left(nullptr), right(nullptr), height(1) {}
+};
+
+int height(Node* root) {
+    return root ? root->height : 0;
+}
+
+int balanceFactor(Node* root) {
+    return height(root->left) - height(root->right);
+}
+
+Node* rotateRight(Node* root) {
+    Node* newRoot = root->left;
+    root->left = newRoot->right;
+    newRoot->right = root;
+    root->height = max(height(root->left), height(root->right)) + 1;
+    newRoot->height = max(height(newRoot->left), height(newRoot->right)) + 1;
+    return newRoot;
+}
+
+Node* rotateLeft(Node* root) {
+    Node* newRoot = root->right;
+    root->right = newRoot->left;
+    newRoot->left = root;
+    root->height = max(height(root->left), height(root->right)) + 1;
+    newRoot->height = max(height(newRoot->left), height(newRoot->right)) + 1;
+    return newRoot;
+}
+
+Node* insert(Node* root, int data) {
+    if (!root) return new Node(data);
+    if (data < root->data) root->left = insert(root->left, data);
+    else root->right = insert(root->right, data);
+
+    root->height = 1 + max(height(root->left), height(root->right));
+
+    int balance = balanceFactor(root);
+
+    if (balance > 1 && data < root->left->data) return rotateRight(root);
+    if (balance < -1 && data > root->right->data) return rotateLeft(root);
+    if (balance > 1 && data > root->left->data) {
+        root->left = rotateLeft(root->left);
+        return rotateRight(root);
+    }
+    if (balance < -1 && data < root->right->data) {
+        root->right = rotateRight(root->right);
+        return rotateLeft(root);
+    }
+
+    return root;
+}
+
+void inorder(Node* root) {
+    if (!root) return;
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+
+int main() {
+    Node* root = nullptr;
+    root = insert(root, 10);
+    root = insert(root, 20);
+    root = insert(root, 30);
+    root = insert(root, 40);
+    root = insert(root, 50);
+    root = insert(root, 25);
+
+    cout << "Inorder Traversal: ";
+    inorder(root);
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Heap (Priority Queue)",
+    content: `
+        <h2>Heap (Priority Queue)</h2>
+        <p>
+            A heap is a special tree-based data structure that satisfies the heap property. In a max heap, for every node, the value is greater than or equal to the values of its children.
+        </p>
+        <h3>Example: Max-Heap Implementation</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class MaxHeap {
+public:
+    vector<int> heap;
+    
+    void push(int val) {
+        heap.push_back(val);
+        int index = heap.size() - 1;
+        while (index > 0) {
+            int parent = (index - 1) / 2;
+            if (heap[parent] >= heap[index]) break;
+            swap(heap[parent], heap[index]);
+            index = parent;
+        }
+    }
+
+    int pop() {
+        if (heap.empty()) return -1;
+        int root = heap[0];
+        heap[0] = heap.back();
+        heap.pop_back();
+        
+        int index = 0;
+        while (index < heap.size()) {
+            int leftChild = 2 * index + 1;
+            int rightChild = 2 * index + 2;
+            int largest = index;
+
+            if (leftChild < heap.size() && heap[leftChild] > heap[largest]) largest = leftChild;
+            if (rightChild < heap.size() && heap[rightChild] > heap[largest]) largest = rightChild;
+            if (largest == index) break;
+            swap(heap[index], heap[largest]);
+            index = largest;
+        }
+        return root;
+    }
+
+    void print() {
+        for (int i : heap) cout << i << " ";
+        cout << endl;
+    }
+};
+
+int main() {
+    MaxHeap heap;
+    heap.push(10);
+    heap.push(20);
+    heap.push(5);
+    heap.push(30);
+
+    cout << "Max-Heap: ";
+    heap.print();
+    
+    cout << "Pop: " << heap.pop() << endl;
+    cout << "Max-Heap after pop: ";
+    heap.print();
+    
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+{
+    title: "Trie (Prefix Tree)",
+    content: `
+        <h2>Trie (Prefix Tree)</h2>
+        <p>
+            A Trie is a tree-like data structure used to store a dynamic set of strings, where keys are usually strings, and it provides efficient retrieval of strings.
+        </p>
+        <h3>Example: Trie Implementation</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+class TrieNode {
+public:
+    TrieNode* children[26];
+    bool isEndOfWord;
+
+    TrieNode() {
+        isEndOfWord = false;
+        for (int i = 0; i < 26; i++) {
+            children[i] = nullptr;
+        }
+    }
+};
+
+class Trie {
+private:
+    TrieNode* root;
+
+public:
+    Trie() {
+        root = new TrieNode();
+    }
+
+    void insert(string word) {
+        TrieNode* node = root;
+        for (char c : word) {
+            int index = c - 'a';
+            if (!node->children[index]) {
+                node->children[index] = new TrieNode();
+            }
+            node = node->children[index];
+        }
+        node->isEndOfWord = true;
+    }
+
+    bool search(string word) {
+        TrieNode* node = root;
+        for (char c : word) {
+            int index = c - 'a';
+            if (!node->children[index]) return false;
+            node = node->children[index];
+        }
+        return node->isEndOfWord;
+    }
+};
+
+int main() {
+    Trie trie;
+    trie.insert("apple");
+    trie.insert("app");
+    cout << "Search 'apple': " << trie.search("apple") << endl;
+    cout << "Search 'app': " << trie.search("app") << endl;
+    cout << "Search 'banana': " << trie.search("banana") << endl;
+    return 0;
+}
+</pre>
+        </div>
+    `
+},
+
+
+
+{
+    title: "Union-Find (Disjoint Set Union - DSU)",
+    content: `
+        <h2>Union-Find (Disjoint Set Union - DSU)</h2>
+        <p>
+            The Union-Find data structure is used to manage a partition of a set into disjoint subsets and supports two main operations: union and find.
+        </p>
+        <h3>Example: Union-Find Implementation</h3>
+        <div class="code-box">
+<pre>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class UnionFind {
+private:
+    vector<int> parent, rank;
+
+public:
+    UnionFind(int size) {
+        parent.resize(size);
+        rank.resize(size, 0);
+        for (int i = 0; i < size; i++) parent[i] = i;
+    }
+
+    int find(int x) {
+        if (parent[x] != x) parent[x] = find(parent[x]);
+        return parent[x];
+    }
+
+    void unionSets(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY]) parent[rootY] = rootX;
+            else if (rank[rootX] < rank[rootY]) parent[rootX] = rootY;
+            else {
+                parent[rootY] = rootX;
+                rank[rootX]++;
+            }
+        }
+    }
+};
+
+int main() {
+    UnionFind uf(5);
+    uf.unionSets(0, 1);
+    uf.unionSets(2, 3);
+    uf.unionSets(1, 3);
+
+    cout << "Find(0): " << uf.find(0) << endl;
+    cout << "Find(3): " << uf.find(3) << endl;
+
+    return 0;
+}
+</pre>
+        </div>
+    `
+}
+
+
+
+        
+        ];
+
+        let currentSection = 0;
+        let progress = 0;
+
+        // Function to Update Content
+        function updateContent() {
+            const content = document.getElementById("content");
+            content.innerHTML = sections[currentSection].content;
+
+            // Hide or show completion message
+            if (currentSection === sections.length - 1) {
+                document.getElementById("completion-message").style.display = "block";
+                document.getElementById("next-btn").style.display = "none"; // Hide next button on completion
+            } else {
+                document.getElementById("completion-message").style.display = "none";
+                document.getElementById("next-btn").style.display = "block"; // Ensure next button is visible
+            }
+        }
+
+        // Function to Move to Next Section
+        function nextSection() {
+            if (currentSection < sections.length - 1) {
+                currentSection++;
+                updateContent();
+            }
+        }
+
+        // Function to Move to Previous Section
+        function prevSection() {
+            if (currentSection > 0) {
+                currentSection--;
+                updateContent();
+            }
+        }
+
+        // Function to Mark Section as Done
+        function markAsDone() {
+            progress = Math.min(100, ((currentSection + 1) / sections.length) * 100);
+            progressBar.style.width = progress + "%";
+            progressBar.innerText = Math.round(progress) + "%";
+        }
+
+        // page 
+        updateContent();
+    </script>
+</body>
+
+</html>
